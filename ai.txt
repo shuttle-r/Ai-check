@@ -42,6 +42,7 @@ end)
 -- function if someine join
 spawn(function()
 game:GetService("Players").PlayerAdded:Connect(function()
+   wait(5)
    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Hello Human! im your personal ai made with banana technology i will protect your house (not your family purchases family pack for protection)","All")
    wait(2)
    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Please type :HeyAi to show all i can. typing that command you agree at TERMS OF SERVICE and PRIVACY POLICY","All")
@@ -50,6 +51,7 @@ game:GetService("Players").PlayerAdded:Connect(function()
 end)
 end)
 
+spawn(function()
 -- meesage center
 game.Players.PlayerAdded:connect(function(Player)
     Player.Chatted:connect(function(Message)
@@ -62,8 +64,8 @@ game.Players.PlayerAdded:connect(function(Player)
         end
     end)
 end) 
-
-
+end)
+pcall(function()
 game.Players.PlayerAdded:connect(function(Player)
     Player.Chatted:connect(function(Message)
         if Message:lower() == ":talk" then
@@ -72,7 +74,7 @@ game.Players.PlayerAdded:connect(function(Player)
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 
-_G.Owner = "ChildrenCatcher"
+_G.Owner = "redter01"
 _G.Magnitude = 10
 
 function getChat(message,plrname)
@@ -97,3 +99,4 @@ end)
         end
     end)
 end) 
+end)
