@@ -1,0 +1,99 @@
+-- start of ai
+
+
+
+
+
+
+--[[
+local events = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents")
+local messageDoneFiltering = events:WaitForChild("OnMessageDoneFiltering")
+local players = game:GetService("Players")
+
+messageDoneFiltering.OnClientEvent:Connect(function(message)
+  local player = players:FindFirstChild(message.FromSpeaker)
+  local message = message.Message or ""
+
+  if player then
+    print(player.Name .. ": " .. message) 
+  end
+end)
+
+]]--
+
+
+spawn(function()
+local Character = game.Players.LocalPlayer.Character
+while wait(1) do
+Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(5), 0)
+end
+end)
+
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end) 
+
+
+
+
+-- function if someine join
+spawn(function()
+game:GetService("Players").PlayerAdded:Connect(function()
+   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Hello Human! im your personal ai made with banana technology i will protect your house (not your family purchases family pack for protection)","All")
+   wait(2)
+   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Please type :HeyAi to show all i can. typing that command you agree at TERMS OF SERVICE and PRIVACY POLICY","All")
+   wait(3)
+   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("If you wondering 'how i remove this ai?' well please contact the owner (ChildrenCatcher) to remove ME OR just wait till my server get disconnected","All")
+end)
+end)
+
+-- meesage center
+game.Players.PlayerAdded:connect(function(Player)
+    Player.Chatted:connect(function(Message)
+        if Message:lower() == ":HeyAi" then
+            
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(":talk - to talk i guess","All")
+            wait(1)
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(":monitor - monitor your kids by listening to there chat NOTE: this feature still on testing and will not work unless owner is not lazy","All")
+            
+        end
+    end)
+end) 
+
+
+game.Players.PlayerAdded:connect(function(Player)
+    Player.Chatted:connect(function(Message)
+        if Message:lower() == ":talk" then
+            
+            
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+
+_G.Owner = "ChildrenCatcher"
+_G.Magnitude = 10
+
+function getChat(message,plrname)
+
+   local Split = message:gsub(" ", "+") -- This takes spaces within the person's message and turns it into for ex: Hi+How+Are+You... to ensure that there are no errors and to also make the URL work
+   
+   local Response = game:HttpGet("https://api.affiliateplus.xyz/api/chatbot?message=" .. Split .. "&botname=" .. plrname .. "&ownername=" .. _G.Owner .. "&user=1")
+   local Data = HttpService:JSONDecode(Response)
+   wait(1)
+   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Data.message, "All")
+end
+
+Players.PlayerChatted:Connect(function(type, plr, message)
+   if plr.Name ~= Players.LocalPlayer.Name then
+    if (plr.Character.HumanoidRootPart.Position - Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Magnitude then
+    getChat(message, plr.Name)
+    end
+   end
+end)
+            
+            
+        end
+    end)
+end) 
