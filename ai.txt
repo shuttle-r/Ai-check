@@ -24,7 +24,7 @@ end)
 
 spawn(function()
 local Character = game.Players.LocalPlayer.Character
-while wait(1) do
+while wait() do
 Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(5), 0)
 end
 end)
@@ -42,11 +42,11 @@ end)
 -- function if someine join
 spawn(function()
 game:GetService("Players").PlayerAdded:Connect(function()
-   wait(5)
+   wait(10)
    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Hello Human! im your personal ai made with banana technology i will protect your house (not your family purchases family pack for protection)","All")
-   wait(2)
-   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Please type :HeyAi to show all i can. typing that command you agree at TERMS OF SERVICE and PRIVACY POLICY","All")
-   wait(3)
+   wait(10)
+   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Please type :heyai to show all i can. typing that command you agree at TERMS OF SERVICE and PRIVACY POLICY","All")
+   wait(10)
    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("If you wondering 'how i remove this ai?' well please contact the owner (ChildrenCatcher) to remove ME OR just wait till my server get disconnected","All")
 end)
 end)
@@ -55,7 +55,7 @@ spawn(function()
 -- meesage center
 game.Players.PlayerAdded:connect(function(Player)
     Player.Chatted:connect(function(Message)
-        if Message:lower() == ":HeyAi" then
+        if Message:lower() == ":heyai" then
             
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(":talk - to talk i guess","All")
             wait(1)
