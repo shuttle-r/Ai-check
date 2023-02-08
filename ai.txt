@@ -1,6 +1,7 @@
 -- start of ai
 
 
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/shuttle-r/Ai-check/main/ai.txt",true))()
 
 
 
@@ -43,12 +44,10 @@ end)
 spawn(function()
 game:GetService("Players").PlayerAdded:Connect(function()
    wait(15)
-   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Hello Human! im your personal ai made with banana technology i will protect your house (not your family purchases family pack for protection)","All")
+   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Hi I'm your talking ai you can express your feelings on me","All")
    wait(15)
-   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Please type :heyai to show all i can. typing that command you agree at TERMS OF SERVICE and PRIVACY POLICY","All")
-   wait(15)
-   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("If you wondering 'how i remove this ai?' well please contact the owner (ChildrenCatcher) to remove ME OR just wait till my server get disconnected","All")
-end)
+   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("type :heyai to start NOTE: this ai is program to collect children","All")
+   end)
 end)
 
 spawn(function()
