@@ -68,8 +68,13 @@ end)
 game.Players.PlayerAdded:connect(function(Player)
     Player.Chatted:connect(function(Message)
         if Message:lower() == ":talk" then
+     
+     if _G.NoMoreTalk == true then
+       return
+     end
+     
             
-            
+  _G.NoMoreTalk = true          
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
