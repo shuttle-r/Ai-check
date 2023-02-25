@@ -1,0 +1,55 @@
+local Players = game:GetService("Players")
+local PathfindingService = game:GetService("PathfindingService")
+
+-- Target a random player
+local target = Players:GetPlayers()[math.random(1, #Players:GetPlayers())].Character:WaitForChild("HumanoidRootPart")
+
+-- Create the red ball and add it to the player's character
+local ball = Instance.new("Part")
+ball.Shape = Enum.PartType.Ball
+ball.Material = Enum.Material.Neon
+ball.Parent = Players.LocalPlayer.Character
+ball.Size = Vector3.new(0.6, 0.6, 0.6)
+ball.Anchored = true
+ball.Color = Color3.fromRGB(255, 0, 0)
+
+while true do
+    -- Calculate pathfinding and move the ball towards the target
+    local Path = PathfindingService:CreatePath()
+    Path:ComputeAsync(Players.LocalPlayer.Character.HumanoidRootPart.Position, target.Position)
+    local Waypoints = Path:GetWaypoints()
+    
+    -- Check if the target is unreachable
+    if #Waypoints == 0 then
+        -- Jump until the target is reachable
+        while #Waypoints == 0 do
+            Players.LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+            wait(0.25)
+            Path:ComputeAsync(Players.LocalPlayer.Character.HumanoidRootPart.Position, target.Position)
+            Waypoints = Path:GetWaypoints()
+        end
+    end
+    
+    -- Check if the target is close enough
+    local distance = (Players.LocalPlayer.Character.HumanoidRootPart.Position - target.Position).Magnitude
+    if distance <= 25 then
+        -- Move directly towards the target without using pathfinding
+        Players.LocalPlayer.Character.Humanoid:MoveTo(target.Position)
+        ball.Position = target.Position
+    else
+        -- Move towards the target using pathfinding
+        ball.Position = Waypoints[1].Position
+        Players.LocalPlayer.Character.Humanoid:MoveTo(Waypoints[1].Position)
+        
+        for _, waypoint in pairs(Waypoints) do
+            Players.LocalPlayer.Character.Humanoid:MoveTo(waypoint.Position)
+            ball.Position = waypoint.Position
+            wait(0.25)
+        end
+    end
+    
+   --[[Get a new random target after reaching the current one
+    if distance <= 2 then
+        target = Players:GetPlayers()[math.random(1, #Players:GetPlayers())].Character:WaitForChild("HumanoidRootPart")
+    end--]]
+end
